@@ -2,10 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "outDir": "../../dist/out-tsc",
-    "types": []
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["test.ts", "**/*.spec.ts"]
+  "exclude": ["**/*.spec.ts"]
 }
