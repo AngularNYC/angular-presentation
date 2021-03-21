@@ -1,5 +1,6 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ContentPresentation } from './types';
+import { arrayMoveByIndex } from '../../../shared/helpers/helpers';
 
 export function reducer(
   presentations: ContentPresentation[],
@@ -33,6 +34,23 @@ export function reducer(
       return presentations;
     case 'deleteSlide':
       getPresentation().slides.filter(({ id }) => id !== payload.id);
+      return presentations;
+    case 'deleteSlides':
+      getPresentation().slides = getPresentation().slides.filter(
+        (slide, index) => !payload.selections.includes(index)
+      );
+
+      return presentations;
+    case 'reorderSlides':
+      const toIndex = payload.toIndex;
+      const selections = payload.selections;
+
+      const slides = getPresentation().slides;
+
+      const reorderedSlides = arrayMoveByIndex(slides, selections, toIndex);
+
+      getPresentation().slides = [...reorderedSlides];
+
       return presentations;
 
     case 'addBlock': {
